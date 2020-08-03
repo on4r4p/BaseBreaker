@@ -1,0 +1,55 @@
+import re
+
+## Converts text from format "1-2-3-4-5-6-7-8" to "abcdefgh"
+## Sample input: "6-15-15-20-2-15-20 20-23-15: 7-18-21-14-11-12-5'19
+## 7-18-5-22-5-14-7-5."
+
+def A1Z26Cipher ( code ):
+    return " ".join(
+        ["".join([((re.search("\D", c).group(0)).join(
+            [(chr(int(i)-1+ord('A'))) if i.isdigit() else ""
+             for i in re.split("\D", c)]))
+                  if not c.isdigit() else chr(int(c)-1+ord('A'))
+                  for c in word.split("-")])
+for word in code.split(" ")])
+
+def allsplit(s, i = 0):
+  if len(s) == i:
+    return [[s]]
+  elif s[i] == " ":
+           # Part A                                     # Part B
+    return [[s[0:i]] + acc for acc in allsplit(s[i + 1:])] + allsplit(s, i + 1)
+  else:
+    return allsplit(s, i + 1)
+
+
+
+res = []
+word = "1 9 1 1 2 2 1 2 0"
+cnt = 0
+tmp = ""
+
+res = allsplit(word)
+
+final = []
+for i in res:
+     joined = "".join(i)
+     joined = joined.replace(" ","-")
+     final.append(joined)
+
+for i in final:
+     print(i)
+
+
+
+#for chiffre in word:
+#     if cnt >=2:
+#          tmp += "-"
+#          cnt = 0
+#     tmp += chiffre
+#     cnt = cnt + 1
+
+#print(tmp)
+#res.append(tmp)O
+     
+#print(A1Z26Cipher(str(word)))

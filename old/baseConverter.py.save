@@ -1,0 +1,58 @@
+q
+
+
+
+
+q baseSystemTobaseN(n,outputBaseSymbols):    
+    base = len(outputBaseSymbols)
+    num = []
+    while True:
+        q = n//base
+        r = n % base
+        num.append(r)
+        n = q
+        if q < base:
+            num.append(q)
+            break
+    return ''.join([outputBaseSymbols[x] for x in num[::-1]])
+
+def toSystemBase(s,inputBaseSymbols):
+    base = len(inputBaseSymbols)   
+    result = 0
+    for i,j in enumerate(s[::-1]):
+        result += inputBaseSymbols.index(j)*pow(base,i)
+    return result
+
+def baseXtoY(source,inputBaseSymbols,outputBaseSymbols):
+    return baseSystemTobaseN(
+             toSystemBase(source,inputBaseSymbols),
+             outputBaseSymbols )
+
+
+def baseSystemTobaseN2(n,outputBaseSymbols):
+    base = 26
+    num = []
+    while True:
+        q = n//base
+        r = n % base
+        num.append(r)
+        n = q
+        if q < base:
+            num.append(q)
+            break
+    return ''.join([outputBaseSymbols[x] for x in num[::-1]])
+
+def toSystemBase2(s,inputBaseSymbols):
+    base = len(inputBaseSymbols)
+    result = 0
+    for i,j in enumerate(s[::-1]):
+        result += inputBaseSymbols.index(j)*pow(base,i)
+    return result
+
+def baseXtoY2(source,inputBaseSymbols,outputBaseSymbols):
+    return baseSystemTobaseN2(
+             toSystemBase2(source,inputBaseSymbols),
+             outputBaseSymbols )
+
+
+
